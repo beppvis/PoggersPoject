@@ -118,7 +118,7 @@ function drawTrain(train) {
     ctx.fillStyle = "#A52A2A";
     ctx.fill();
     ctx.closePath();
-    train.position.y += 1
+    train.position.y += 1;
 }
 
 
@@ -167,7 +167,7 @@ function checkME(currentWord) {
 
 
 function wordGen() {
-    let currentWord = wordsByRank[1][Math.floor(Math.random() * wordsByRank[1].length)];
+    let currentWord = wordsByRank[2][Math.floor(Math.random() * wordsByRank[2].length)];
     let wordContainer = document.getElementById('wordContainer');
     wordContainer.innerHTML = '';
     currentWord.split('').forEach(letter => {
@@ -195,5 +195,5 @@ function start() {
     });
     document.getElementById('right').value = '';
     draw(currentWord);
-    setInterval(spawnTrain, 1000);
+    setInterval(spawnTrain, 2000);
 }

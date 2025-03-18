@@ -11,9 +11,18 @@
     }
 
     canvas {
-      background: #eee;
+      background-color: darkgrey;
       display: block;
       margin: 0 auto;
+    }
+    body{
+      background-color:dimgrey;
+    }
+
+    h1{
+      text-align: center;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
     }
 
     #menu-ctn{
@@ -21,11 +30,30 @@
       justify-content: center;
     }
 
+    .word-container{
+      text-align: center;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-size: 32px;
+      padding: 10px;
+    }
+
+    button{
+      height: 50px;
+      width: 100px;
+
+      background-color: cadetblue;
+      border: 3px solid black;
+    }
+
+    button:hover{
+      cursor: pointer;
+    }
 
   </style>
 </head>
 
 <body>
+  <h1>Type Rails</h1>
   <canvas id="myCanvas" width="600" height="800"></canvas>
   
   <div class="word-container" id="wordContainer"></div>
