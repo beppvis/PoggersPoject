@@ -1,7 +1,52 @@
 
 const canvas = document.getElementById("myCanvas");
 
-document.addEventListener("keypress", keyHandler, false);
+
+
+words = {
+    "1": [
+        "const",
+        "let",
+        "var",
+        "function",
+        "return"
+    ],
+    "2": [
+        "if",
+        "else",
+        "while",
+        "do-while",
+        "for"
+    ],
+    "3": [
+        "switch",
+        "case",
+        "break",
+        "continue",
+        "throw"
+    ],
+    "4": [
+        "try",
+        "catch",
+        "finally",
+        "throw",
+        "instanceof"
+    ],
+    "5": [
+        "class",
+        "extends",
+        "constructor",
+        "super",
+        "static"
+    ]
+};
+let wordsByRank = new Array()
+
+for (let level = 1; level <= 5; level++) {
+    if (words[level]) {
+        wordsByRank.push(words[level]);
+    }
+}
 
 let player = {
     trakNo: 1,
@@ -17,9 +62,6 @@ let track3 = { x: 480 }
 
 
 let trains = new Array()
-
-
-
 
 function keyHandler(e) {
     if (e.key === "d" && player.trakNo != 3)
@@ -76,7 +118,7 @@ function drawTrain(train) {
     ctx.fillStyle = "#A52A2A";
     ctx.fill();
     ctx.closePath();
-    train.position.y += 10
+    train.position.y += 1
 }
 
 
@@ -89,11 +131,12 @@ function drawPlayer() {
 }
 
 
-function draw() {
+function draw(currentWord) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawPlayer();
     trains.forEach(drawTrain);
     trains.forEach(collishionCheck);
+    checkME(currentWord);
     if (!isGameOver)
         requestAnimationFrame(draw);
     else {
@@ -103,7 +146,53 @@ function draw() {
 }
 
 
+function checkME(currentWord) {
+    document.getElementById('right').addEventListener('input', function() {
+        let inputText = this.value;
+        if (inputText.trim() === currentWord) {
+            keyHandler({ key: 'd' });
+            currentWord = wordGen();
+            this.value = '';
+        }
+    });
+    document.getElementById('left').addEventListener('input', function() {
+        let inputText = this.value;
+        if (inputText.trim() === currentWord) {
+            keyHandler({ key: 'a' });
+            currentWord = wordGen();
+            this.value = '';
+        }
+    });
+}
+
+
+function wordGen() {
+    let currentWord = wordsByRank[1][Math.floor(Math.random() * wordsByRank[1].length)];
+    let wordContainer = document.getElementById('wordContainer');
+    wordContainer.innerHTML = '';
+    currentWord.split('').forEach(letter => {
+        let span = document.createElement('span');
+        span.textContent = letter;
+        span.classList.add('word-char');
+        wordContainer.appendChild(span);
+    });
+    return currentWord;
+
+}
+
+
 function start() {
-    draw();
+
+    let currentWord = wordsByRank[1][Math.floor(Math.random() * wordsByRank[1].length)];
+    let wordContainer = document.getElementById('wordContainer');
+    wordContainer.innerHTML = '';
+    currentWord.split('').forEach(letter => {
+        let span = document.createElement('span');
+        span.textContent = letter;
+        span.classList.add('word-char');
+        wordContainer.appendChild(span);
+    });
+    document.getElementById('right').value = '';
+    draw(currentWord);
     setInterval(spawnTrain, 1000);
 }
