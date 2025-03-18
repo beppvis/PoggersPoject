@@ -1,3 +1,4 @@
+const { Position } = require("vscode-json-languageservice");
 
 
 const canvas = document.getElementById("myCanvas");
@@ -6,8 +7,18 @@ document.addEventListener("keypress", keyHandler, false);
 
 let player = {
     trakNo: 1,
-    postion: { x: 0, y: 0 }
+    postion: { x: 0, y: 700 }
 }
+
+
+let track1 = { x: 50 }
+let track2 = { x: 300 }
+let track3 = { x: 480 }
+
+
+let trains = new Array()
+
+
 
 
 function keyHandler(e) {
@@ -16,41 +27,51 @@ function keyHandler(e) {
     else if (e.key === "a" && player.trakNo != 1)
         player.trakNo -= 1
 
-    switch (player.trakNo) {
-        case 1:
-            player.postion.x = 800
-            player.postion.y = 0
-            break;
-        case 2:
-            player.postion.x = 800
-            player.postion.y = 300
-            break;
-        case 3:
-            player.postion.x = 800
-            player.postion.y = 400
-            break;
-        default:
-            player.postion.x = 800
-            player.postion.y = 300
-            break;
+    player.postion.x = getTrackX(player.trakNo)
 
+}
+
+
+function getTrackX(trackNo) {
+    switch (trakNo) {
+        case 1:
+            return track1.x;
+        case 2:
+            return track2.x;
+        case 3:
+            return track3.x;
+        default:
+            return 0;
     }
+
 
 }
 
 const ctx = canvas.getContext("2d");
 
 
+function drawTrains() {
+    let random_track = 1;
+    trains.push(
+        {
+            trackNo: random_track,
+            position: { x: getTrackX(random_track), y: 0 }
+        }
+    );
+
+
+
+}
 
 
 function drawPlayer() {
+    console.log(player.postion);
     ctx.beginPath();
-    ctx.rect(player.postion.x, player.postion.y, 10, 10);
+    ctx.rect(player.postion.x, player.postion.y, 50, 50);
     ctx.fillStyle = "#FF0000";
     ctx.fill();
     ctx.closePath();
 }
-
 
 
 function draw() {
