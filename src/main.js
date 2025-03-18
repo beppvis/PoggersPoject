@@ -1,15 +1,26 @@
 
 const canvas = document.getElementById("myCanvas");
 
-document.addEventListener('keypress', function(e){
+document.addEventListener('keydown', function(e) {
     if(e.key === "ArrowRight"){
-        document.getElementById("right").focus()
+        document.getElementById("right").focus();
     }
     if(e.key === "ArrowLeft"){
-        document.getElementById("left").focus()
+        document.getElementById("left").focus();
     }
-})
+    if(e.key === "Tab") {
+        e.preventDefault(); 
+        
 
+        if(document.activeElement === document.getElementById("left")) {
+            document.getElementById("right").focus();
+        }
+       
+        else {
+            document.getElementById("left").focus();
+        }
+    }
+});
 words = {
     "1": [
         "const",
