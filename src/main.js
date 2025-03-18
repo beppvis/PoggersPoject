@@ -165,7 +165,7 @@ function draw(currentWord) {
         ctx.font = "30px Arial"
         ctx.fillText("GameOver", 250, 300)
         let nowTime = new Date().getSeconds();
-        ctx.fillText("HighScore " + (nowTime - startTime), 100, 350)
+        ctx.fillText("HighScore " + (nowTime - startTime), 250, 350)
         return
     }
 }
