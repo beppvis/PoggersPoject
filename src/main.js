@@ -164,6 +164,8 @@ function draw(currentWord) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.font = "30px Arial"
         ctx.fillText("GameOver", 250, 300)
+        let nowTime = new Date().getSeconds();
+        ctx.fillText("HighScore " + (nowTime - startTime), 100, 350)
         return
     }
 }
@@ -205,7 +207,7 @@ function wordGen() {
 
 
 function start() {
-    startTime = new Date().getHours();
+    startTime = new Date().getSeconds();
     isGameOver = false
     trains = new Array();
     let currentWord = wordsByRank[1][Math.floor(Math.random() * wordsByRank[1].length)];
