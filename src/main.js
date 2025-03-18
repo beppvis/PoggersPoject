@@ -1,5 +1,3 @@
-const { Position } = require("vscode-json-languageservice");
-
 
 const canvas = document.getElementById("myCanvas");
 
@@ -7,12 +5,12 @@ document.addEventListener("keypress", keyHandler, false);
 
 let player = {
     trakNo: 1,
-    postion: { x: 0, y: 700 }
+    postion: { x: 50, y: 700 }
 }
 
 
 let track1 = { x: 50 }
-let track2 = { x: 300 }
+let track2 = { x: 250 }
 let track3 = { x: 480 }
 
 
@@ -33,7 +31,7 @@ function keyHandler(e) {
 
 
 function getTrackX(trackNo) {
-    switch (trakNo) {
+    switch (trackNo) {
         case 1:
             return track1.x;
         case 2:
@@ -50,22 +48,35 @@ function getTrackX(trackNo) {
 const ctx = canvas.getContext("2d");
 
 
-function drawTrains() {
-    let random_track = 1;
-    trains.push(
-        {
-            trackNo: random_track,
-            position: { x: getTrackX(random_track), y: 0 }
-        }
-    );
+
+
+function spawnTrain() {
+    let random_track = Math.floor(Math.random() * 3 + 1);
+    console.log(random_track)
+    let train = {
+        trackNo: random_track,
+        position: { x: getTrackX(random_track), y: 0 }
+    }
+    trains.push(train);
+}
 
 
 
+function collishionCheck(trainplayer) {
+
+}
+
+function drawTrain(train) {
+    ctx.beginPath();
+    ctx.rect(train.position.x, train.position.y, 50, 50);
+    ctx.fillStyle = "#A52A2A";
+    ctx.fill();
+    ctx.closePath();
+    train.position.y += 10
 }
 
 
 function drawPlayer() {
-    console.log(player.postion);
     ctx.beginPath();
     ctx.rect(player.postion.x, player.postion.y, 50, 50);
     ctx.fillStyle = "#FF0000";
@@ -77,10 +88,12 @@ function drawPlayer() {
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawPlayer();
+    trains.forEach(drawTrain);
     requestAnimationFrame(draw);
 }
 
 
 function start() {
     draw();
+    setInterval(spawnTrain, 1000);
 }
