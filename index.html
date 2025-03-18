@@ -15,15 +15,27 @@
       display: block;
       margin: 0 auto;
     }
+
+    #menu-ctn{
+      display: flex;
+      justify-content: center;
+    }
+
+
   </style>
 </head>
 
 <body>
   <canvas id="myCanvas" width="600" height="800"></canvas>
-  <button id="starButton" onclick="start()">Start</button>
+  
   <div class="word-container" id="wordContainer"></div>
-  <input type="text" id="left" autofocus>
-  <input type="text" id="right" autofocus>
+  <div id="menu-ctn">
+    <button id="starButton" onclick="start()">Start</button>
+    <input type="text" id="left" autofocus>
+    <input type="text" id="right" autofocus>
+    
+  </div>
+  
   <script src="src/main.js">
   </script>
 

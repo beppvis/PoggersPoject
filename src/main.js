@@ -182,7 +182,8 @@ function wordGen() {
 
 
 function start() {
-
+    isGameOver = false
+    trains = new Array();
     let currentWord = wordsByRank[1][Math.floor(Math.random() * wordsByRank[1].length)];
     let wordContainer = document.getElementById('wordContainer');
     wordContainer.innerHTML = '';
