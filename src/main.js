@@ -1,6 +1,8 @@
 
 const canvas = document.getElementById("myCanvas");
 
+let startTime ;
+
 document.addEventListener('keydown', function(e) {
     if(e.key === "ArrowRight"){
         document.getElementById("right").focus();
@@ -156,9 +158,12 @@ function draw(currentWord) {
     trains.forEach(collishionCheck);
     checkME(currentWord);
     if (!isGameOver)
+        
         requestAnimationFrame(draw);
     else {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.font = "30px Arial"
+        ctx.fillText("GameOver", 250, 300)
         return
     }
 }
@@ -200,6 +205,7 @@ function wordGen() {
 
 
 function start() {
+    startTime = new Date().getHours();
     isGameOver = false
     trains = new Array();
     let currentWord = wordsByRank[1][Math.floor(Math.random() * wordsByRank[1].length)];
