@@ -9,6 +9,8 @@ let player = {
 }
 
 
+let isGameOver = false
+
 let track1 = { x: 50 }
 let track2 = { x: 250 }
 let track3 = { x: 480 }
@@ -62,7 +64,9 @@ function spawnTrain() {
 
 
 
-function collishionCheck(trainplayer) {
+function collishionCheck(train) {
+    if (player.postion.x == train.position.x && player.postion.y == train.position.y)
+        isGameOver = true
 
 }
 
@@ -89,7 +93,13 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawPlayer();
     trains.forEach(drawTrain);
-    requestAnimationFrame(draw);
+    trains.forEach(collishionCheck);
+    if (!isGameOver)
+        requestAnimationFrame(draw);
+    else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        return
+    }
 }
 
 
