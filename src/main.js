@@ -1,7 +1,14 @@
 
 const canvas = document.getElementById("myCanvas");
 
-
+document.addEventListener('keypress', function(e){
+    if(e.key === "ArrowRight"){
+        document.getElementById("right").focus()
+    }
+    if(e.key === "ArrowLeft"){
+        document.getElementById("left").focus()
+    }
+})
 
 words = {
     "1": [
